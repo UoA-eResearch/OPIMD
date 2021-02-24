@@ -159,37 +159,70 @@
             </tbody>
         </table>
         <div id="conResult"></div>
+        <h4>Access</h4>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="addrLabel">Please enter your address</span>
+            <input type="text" class="form-control" id="address" aria-describedby="addrLabel">
+        </div>
+        <div id="accessResult"></div>
+
+        <div id="sumResult"></div>
+
     </div>
     <script>
+        function sumAll() {
+            if (window.inc && window.house && window.hlth && window.asset && window.con && window.dz) {
+                //=(SUM(D16,D25,D34,D41,D49)+D57*0.1)/5.1*100
+                var sum = (inc + house + hlth + asset + con + dz * .1) / 5.1*100;
+                console.log(sum)
+                for (var brk of data.breaks) {
+                    if (brk.min < sum && brk.max > sum) {
+                        $("#sumResult").text("OPIMD decile: " + brk.decile);
+                    }
+                }
+            }
+        }
         $.getJSON("data.json", function(data) {
             console.log(data);
             window.data = data
             $("input").click(function() {
                 if ($("#incTable input:radio:checked").length == 3) {
                     var code = parseInt($("#incTable input:radio:checked").map((i,e) => $(e).val()).get().join(""))
-                    console.log(code, data.inc[code])
+                    window.inc = data.inc[code]
                     $("#incResult").text("Income OPIMD population rank: " + data.inc[code])
                 }
                 if ($("#houTable input:radio:checked").length == 3) {
                     var code = parseInt($("#houTable input:radio:checked").map((i,e) => $(e).val()).get().join(""))
-                    console.log(code, data.house[code])
+                    window.house = data.house[code]
                     $("#houResult").text("Housing OPIMD population rank: " + data.house[code])
                 }
                 if ($("#hlthTable input:radio:checked").length == 4) {
                     var code = parseInt($("#hlthTable input:radio:checked").map((i,e) => $(e).val()).get().join(""))
-                    console.log(code, data.hlth[code])
+                    window.hlth = data.hlth[code]
                     $("#hlthResult").text("Health OPIMD population rank: " + data.hlth[code])
                 }
                 if ($("#assetTable input:radio:checked").length == 2) {
                     var code = parseInt($("#assetTable input:radio:checked").map((i,e) => $(e).val()).get().join(""))
-                    console.log(code, data.assets[code])
+                    window.asset = data.assets[code]
                     $("#assetResult").text("Assets OPIMD population rank: " + data.assets[code])
                 }
                 if ($("#conTable input:radio:checked").length == 2) {
                     var code = parseInt($("#conTable input:radio:checked").map((i,e) => $(e).val()).get().join(""))
-                    console.log(code, data.con[code])
+                    window.con = data.con[code]
                     $("#conResult").text("Connectedness OPIMD population rank: " + data.con[code])
                 }
+                sumAll()
+            })
+            $("#address").change(function() {
+                console.log(this.value)
+                $.getJSON("https://imdmap.auckland.ac.nz/datazoneID?address=" + this.value, function(datazone) {
+                    console.log(datazone);
+                    var dz = datazone.datazoneID[0];
+                    console.log(dz, data.dz[dz])
+                    window.dz = data.dz[dz]
+                    $("#accessResult").text("Access OPIMD population rank: " + data.dz[dz])
+                    sumAll()
+                })
             })
         })
     </script>
