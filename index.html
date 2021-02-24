@@ -223,7 +223,7 @@
             $("td").click(function() {
                 console.log("td")
                 var radio = $(this).children("input:radio");
-                radio.prop('checked',!radio.is(':checked'));
+                radio.prop('checked', true);
                 checkRadios();
             });
             $("input").click(function(e) {
