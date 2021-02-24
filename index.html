@@ -14,6 +14,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
     <title>OPIMD calculator</title>
+    <style>
+        h4 {
+            margin-top: 20px
+        }
+    </style>
 </head>
 
 <body>
@@ -40,13 +45,120 @@
                     <td><input type="radio" name="lowinc" value=0></td>
                 </tr>
                 <tr>
-                    <td>Did you receive a Main Benefit in March 2013? </td>
+                    <td>Did you receive a Main Benefit in March 2013?</td>
                     <td><input type="radio" name="mainben" value=1></td>
                     <td><input type="radio" name="mainben" value=0></td>
                 </tr>
             </tbody>
         </table>
         <div id="incResult"></div>
+        <h4>Housing</h4>
+        <table id="houTable" class="table">
+            <thead>
+                <tr>
+                    <th>Question</th>
+                    <th>Yes</th>
+                    <th>No</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Did you live in a household that was overcrowded in March 2013?</td>
+                    <td><input type="radio" name="overcrowd" value=1></td>
+                    <td><input type="radio" name="overcrowd" value=0></td>
+                </tr>
+                <tr>
+                    <td>Did you live in a household that never used heating fuels?</td>
+                    <td><input type="radio" name="noheating" value=1></td>
+                    <td><input type="radio" name="noheating" value=0></td>
+                </tr>
+                <tr>
+                    <td>Did you live in a household that paid rent or mortgage in March 2013?</td>
+                    <td><input type="radio" name="payment" value=1></td>
+                    <td><input type="radio" name="payment" value=0></td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="houResult"></div>
+        <h4>Health</h4>
+        <table id="hlthTable" class="table">
+            <thead>
+                <tr>
+                    <th>Question</th>
+                    <th>Yes</th>
+                    <th>No</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Did you have two or more falls between 2011 and 2015 for which an ACC claim was accepted?</td>
+                    <td><input type="radio" name="falls" value=1></td>
+                    <td><input type="radio" name="falls" value=0></td>
+                </tr>
+                <tr>
+                    <td>Have you had one or more cancer diagnosis registered in the Cancer Register (coverage period 1995-2015)?</td>
+                    <td><input type="radio" name="cancer" value=1></td>
+                    <td><input type="radio" name="cancer" value=0></td>
+                </tr>
+                <tr>
+                    <td>Did you have three or more hospitalisations in the 5 years between 2011 and 2015 (excluding for falls or for cancers)?</td>
+                    <td><input type="radio" name="hosp" value=1></td>
+                    <td><input type="radio" name="hosp" value=0></td>
+                </tr>
+                <tr>
+                    <td>Were you prescribed five or more long-term medicines in 2 consecutive quarters 1 Sep-30 Nov 2012 and 1 Dec 2012-28 Feb 2013?                     </td>
+                    <td><input type="radio" name="meds" value=1></td>
+                    <td><input type="radio" name="meds" value=0></td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="hlthResult"></div>
+        <h4>Assets</h4>
+        <table id="assetTable" class="table">
+            <thead>
+                <tr>
+                    <th>Question</th>
+                    <th>Yes</th>
+                    <th>No</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Did you not own or partly own the dwelling you usually lived in, nor hold it in a family trust, in March 2013?</td>
+                    <td><input type="radio" name="own" value=1></td>
+                    <td><input type="radio" name="own" value=0></td>
+                </tr>
+                <tr>
+                    <td>Did you not earn income from assets (a business, a rental, savings, investments, etc.) in the 12 months to March 2013?</td>
+                    <td><input type="radio" name="incFromAssets" value=1></td>
+                    <td><input type="radio" name="incFromAssets" value=0></td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="assetResult"></div>
+        <h4>Connectedness</h4>
+        <table id="conTable" class="table">
+            <thead>
+                <tr>
+                    <th>Question</th>
+                    <th>Yes</th>
+                    <th>No</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Did you live in a household that had no access to the Internet in March 2013</td>
+                    <td><input type="radio" name="nointernet" value=1></td>
+                    <td><input type="radio" name="nointernet" value=0></td>
+                </tr>
+                <tr>
+                    <td>Did you live alone (in a one-person household in a private occupied dwelling) in March 2013?</td>
+                    <td><input type="radio" name="alone" value=1></td>
+                    <td><input type="radio" name="alone" value=0></td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="conResult"></div>
     </div>
     <script>
         $.getJSON("data.json", function(data) {
@@ -57,6 +169,26 @@
                     var code = parseInt($("#incTable input:radio:checked").map((i,e) => $(e).val()).get().join(""))
                     console.log(code, data.inc[code])
                     $("#incResult").text("Income OPIMD population rank: " + data.inc[code])
+                }
+                if ($("#houTable input:radio:checked").length == 3) {
+                    var code = parseInt($("#houTable input:radio:checked").map((i,e) => $(e).val()).get().join(""))
+                    console.log(code, data.house[code])
+                    $("#houResult").text("Housing OPIMD population rank: " + data.house[code])
+                }
+                if ($("#hlthTable input:radio:checked").length == 4) {
+                    var code = parseInt($("#hlthTable input:radio:checked").map((i,e) => $(e).val()).get().join(""))
+                    console.log(code, data.hlth[code])
+                    $("#hlthResult").text("Health OPIMD population rank: " + data.hlth[code])
+                }
+                if ($("#assetTable input:radio:checked").length == 2) {
+                    var code = parseInt($("#assetTable input:radio:checked").map((i,e) => $(e).val()).get().join(""))
+                    console.log(code, data.assets[code])
+                    $("#assetResult").text("Assets OPIMD population rank: " + data.assets[code])
+                }
+                if ($("#conTable input:radio:checked").length == 2) {
+                    var code = parseInt($("#conTable input:radio:checked").map((i,e) => $(e).val()).get().join(""))
+                    console.log(code, data.con[code])
+                    $("#conResult").text("Connectedness OPIMD population rank: " + data.con[code])
                 }
             })
         })

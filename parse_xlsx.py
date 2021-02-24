@@ -27,11 +27,13 @@ obj["house"] = house.HouRank.to_dict()
 
 con = df["CONNECTCALC"]
 con = con.dropna(subset=["ConPattern"])
+con.ConPattern = con.ConPattern.astype(int)
 con.index = con.ConPattern
 obj["con"] = con.ConRank.to_dict()
 
 assets = df["ASSETSCALC"]
 assets = assets.dropna(subset=["AsPattern"])
+assets.AsPattern = assets.AsPattern.astype(int)
 assets.index = assets.AsPattern
 obj["assets"] = assets.AsRank.to_dict()
 
