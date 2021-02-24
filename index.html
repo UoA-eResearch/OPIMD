@@ -239,6 +239,8 @@
                     window.dz = data.dz[dz]
                     $("#accessResult").text("Access OPIMD population rank: " + data.dz[dz])
                     sumAll()
+                }).fail(function() {
+                    $("#accessResult").text("Unable to geocode address - please check your address is correct")
                 })
             })
         })
