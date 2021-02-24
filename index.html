@@ -15,6 +15,10 @@
 
     <title>OPIMD calculator</title>
     <style>
+        h1 {
+            text-align: center;
+            margin: 20px;
+        }
         h4 {
             margin-top: 20px
         }
@@ -173,6 +177,34 @@
 
     </div>
     <script>
+        function checkRadios() {
+            if ($("#incTable input:radio:checked").length == 3) {
+                var code = parseInt($("#incTable input:radio:checked").map((i,e) => $(e).val()).get().join(""))
+                window.inc = data.inc[code]
+                $("#incResult").text("Income OPIMD population rank: " + data.inc[code])
+            }
+            if ($("#houTable input:radio:checked").length == 3) {
+                var code = parseInt($("#houTable input:radio:checked").map((i,e) => $(e).val()).get().join(""))
+                window.house = data.house[code]
+                $("#houResult").text("Housing OPIMD population rank: " + data.house[code])
+            }
+            if ($("#hlthTable input:radio:checked").length == 4) {
+                var code = parseInt($("#hlthTable input:radio:checked").map((i,e) => $(e).val()).get().join(""))
+                window.hlth = data.hlth[code]
+                $("#hlthResult").text("Health OPIMD population rank: " + data.hlth[code])
+            }
+            if ($("#assetTable input:radio:checked").length == 2) {
+                var code = parseInt($("#assetTable input:radio:checked").map((i,e) => $(e).val()).get().join(""))
+                window.asset = data.assets[code]
+                $("#assetResult").text("Assets OPIMD population rank: " + data.assets[code])
+            }
+            if ($("#conTable input:radio:checked").length == 2) {
+                var code = parseInt($("#conTable input:radio:checked").map((i,e) => $(e).val()).get().join(""))
+                window.con = data.con[code]
+                $("#conResult").text("Connectedness OPIMD population rank: " + data.con[code])
+            }
+            sumAll()
+        }
         function sumAll() {
             if (window.inc && window.house && window.hlth && window.asset && window.con && window.dz) {
                 //=(SUM(D16,D25,D34,D41,D49)+D57*0.1)/5.1*100
@@ -188,33 +220,15 @@
         $.getJSON("data.json", function(data) {
             console.log(data);
             window.data = data
-            $("input").click(function() {
-                if ($("#incTable input:radio:checked").length == 3) {
-                    var code = parseInt($("#incTable input:radio:checked").map((i,e) => $(e).val()).get().join(""))
-                    window.inc = data.inc[code]
-                    $("#incResult").text("Income OPIMD population rank: " + data.inc[code])
-                }
-                if ($("#houTable input:radio:checked").length == 3) {
-                    var code = parseInt($("#houTable input:radio:checked").map((i,e) => $(e).val()).get().join(""))
-                    window.house = data.house[code]
-                    $("#houResult").text("Housing OPIMD population rank: " + data.house[code])
-                }
-                if ($("#hlthTable input:radio:checked").length == 4) {
-                    var code = parseInt($("#hlthTable input:radio:checked").map((i,e) => $(e).val()).get().join(""))
-                    window.hlth = data.hlth[code]
-                    $("#hlthResult").text("Health OPIMD population rank: " + data.hlth[code])
-                }
-                if ($("#assetTable input:radio:checked").length == 2) {
-                    var code = parseInt($("#assetTable input:radio:checked").map((i,e) => $(e).val()).get().join(""))
-                    window.asset = data.assets[code]
-                    $("#assetResult").text("Assets OPIMD population rank: " + data.assets[code])
-                }
-                if ($("#conTable input:radio:checked").length == 2) {
-                    var code = parseInt($("#conTable input:radio:checked").map((i,e) => $(e).val()).get().join(""))
-                    window.con = data.con[code]
-                    $("#conResult").text("Connectedness OPIMD population rank: " + data.con[code])
-                }
-                sumAll()
+            $("td").click(function() {
+                console.log("td")
+                var radio = $(this).children("input:radio");
+                radio.prop('checked',!radio.is(':checked'));
+                checkRadios();
+            });
+            $("input").click(function(e) {
+                e.stopPropagation();
+                checkRadios();
             })
             $("#address").change(function() {
                 console.log(this.value)
