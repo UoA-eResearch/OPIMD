@@ -15,6 +15,9 @@
 
     <title>OPIMD calculator</title>
     <style>
+        body {
+            margin-bottom: 500px;
+        }
         h1 {
             text-align: center;
             margin: 20px;
@@ -25,7 +28,7 @@
         td:first-child {
             width: 80%;
         }
-        #sumResult {
+        #decile {
             font-size: 3rem;
             color: red;
             text-align: center;
@@ -189,7 +192,8 @@
         </div>
         <div id="accessResult"></div>
 
-        <div id="sumResult" style="margin-bottom: 500px"></div>
+        <div id="sumResult"></div>
+        <div id="decile"></div>
 
     </div>
     <script>
@@ -225,10 +229,11 @@
             if (window.inc && window.house && window.hlth && window.asset && window.con && window.dz) {
                 //=(SUM(D16,D25,D34,D41,D49)+D57*0.1)/5.1*100
                 var sum = (inc + house + hlth + asset + con + dz * .1) / 5.1*100;
+                $("#sumResult").text("Sum of ranks: " + sum)
                 console.log(sum)
                 for (var brk of data.breaks) {
                     if (brk.min < sum && brk.max > sum) {
-                        $("#sumResult").text("OPIMD decile: " + brk.decile);
+                        $("#decile").text("Your OPIMD Decile is " + brk.decile);
                     }
                 }
             }
