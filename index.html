@@ -7,32 +7,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap Bundle with Popper -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+        integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+        crossorigin="anonymous"></script>
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
     <title>OPIMD calculator</title>
     <style>
         body {
             margin-bottom: 500px;
         }
+
         h1 {
             text-align: center;
             margin: 20px;
         }
+
         h4 {
             margin-top: 20px
         }
+
         td:first-child {
             width: 80%;
         }
+
         #decile {
             font-size: 3rem;
             color: red;
             text-align: center;
             font-weight: bold;
+        }
+
+        #decilePlot {
+            text-align: center;
+            margin: auto;
+            max-width: 800px;
         }
     </style>
 </head>
@@ -41,10 +57,13 @@
     <div class="container">
         <h1>OPIMD calculator</h1>
         <div id="info">
-            The Older People’s Index of Multiple Deprivation (OPIMD) is a new measure designed to identify concentrations of deprivation among
-            people aged 65 and over in New Zealand. The OPIMD measures deprivation at the individual level with aggregated results available at
+            The Older People’s Index of Multiple Deprivation (OPIMD) is a new measure designed to identify
+            concentrations of deprivation among
+            people aged 65 and over in New Zealand. The OPIMD measures deprivation at the individual level with
+            aggregated results available at
             various geographic scales. For more information, see
-            <a href="https://www.fmhs.auckland.ac.nz/en/soph/about/our-departments/epidemiology-and-biostatistics/research/hgd/research-themes/opimd13.html">https://www.fmhs.auckland.ac.nz/en/soph/about/our-departments/epidemiology-and-biostatistics/research/hgd/research-themes/opimd13.html</a>
+            <a
+                href="https://www.fmhs.auckland.ac.nz/en/soph/about/our-departments/epidemiology-and-biostatistics/research/hgd/research-themes/opimd13.html">https://www.fmhs.auckland.ac.nz/en/soph/about/our-departments/epidemiology-and-biostatistics/research/hgd/research-themes/opimd13.html</a>
         </div>
         <h4>Income</h4>
         <table id="incTable" class="table">
@@ -118,17 +137,20 @@
                     <td><input type="radio" name="falls" value=0></td>
                 </tr>
                 <tr>
-                    <td>Have you had one or more cancer diagnosis registered in the Cancer Register (coverage period 1995-2015)?</td>
+                    <td>Have you had one or more cancer diagnosis registered in the Cancer Register (coverage period
+                        1995-2015)?</td>
                     <td><input type="radio" name="cancer" value=1></td>
                     <td><input type="radio" name="cancer" value=0></td>
                 </tr>
                 <tr>
-                    <td>Did you have three or more hospitalisations in the 5 years between 2011 and 2015 (excluding for falls or for cancers)?</td>
+                    <td>Did you have three or more hospitalisations in the 5 years between 2011 and 2015 (excluding for
+                        falls or for cancers)?</td>
                     <td><input type="radio" name="hosp" value=1></td>
                     <td><input type="radio" name="hosp" value=0></td>
                 </tr>
                 <tr>
-                    <td>Were you prescribed five or more long-term medicines in 2 consecutive quarters 1 Sep-30 Nov 2012 and 1 Dec 2012-28 Feb 2013?                     </td>
+                    <td>Were you prescribed five or more long-term medicines in 2 consecutive quarters 1 Sep-30 Nov 2012
+                        and 1 Dec 2012-28 Feb 2013? </td>
                     <td><input type="radio" name="meds" value=1></td>
                     <td><input type="radio" name="meds" value=0></td>
                 </tr>
@@ -147,13 +169,15 @@
             <tbody>
                 <tr>
                     <!-- flipped -->
-                    <td>Did you own or partly own the dwelling you usually lived in, or hold it in a family trust, in March 2013?</td>
+                    <td>Did you own or partly own the dwelling you usually lived in, or hold it in a family trust, in
+                        March 2013?</td>
                     <td><input type="radio" name="own" value=0></td>
                     <td><input type="radio" name="own" value=1></td>
                 </tr>
                 <tr>
                     <!-- flipped -->
-                    <td>Did you earn income from assets (a business, a rental, savings, investments, etc.) in the 12 months to March 2013?</td>
+                    <td>Did you earn income from assets (a business, a rental, savings, investments, etc.) in the 12
+                        months to March 2013?</td>
                     <td><input type="radio" name="incFromAssets" value=0></td>
                     <td><input type="radio" name="incFromAssets" value=1></td>
                 </tr>
@@ -177,7 +201,8 @@
                     <td><input type="radio" name="nointernet" value=1></td>
                 </tr>
                 <tr>
-                    <td>Did you live alone (in a one-person household in a private occupied dwelling) in March 2013?</td>
+                    <td>Did you live alone (in a one-person household in a private occupied dwelling) in March 2013?
+                    </td>
                     <td><input type="radio" name="alone" value=1></td>
                     <td><input type="radio" name="alone" value=0></td>
                 </tr>
@@ -194,32 +219,35 @@
 
         <div id="sumResult"></div>
         <div id="decile"></div>
-
+        <h4>Deciles explanation</h4>
+        Deciles were calculated by dividing the 433K New Zealanders over 65 into 10 groups, from least deprived to most
+        deprived.
+        <div id="decilePlot"></div>
     </div>
     <script>
         function checkRadios() {
             if ($("#incTable input:radio:checked").length == 3) {
-                var code = parseInt($("#incTable input:radio:checked").map((i,e) => $(e).val()).get().join(""))
+                var code = parseInt($("#incTable input:radio:checked").map((i, e) => $(e).val()).get().join(""))
                 window.inc = data.inc[code]
                 $("#incResult").text("Income OPIMD population rank: " + data.inc[code])
             }
             if ($("#houTable input:radio:checked").length == 3) {
-                var code = parseInt($("#houTable input:radio:checked").map((i,e) => $(e).val()).get().join(""))
+                var code = parseInt($("#houTable input:radio:checked").map((i, e) => $(e).val()).get().join(""))
                 window.house = data.house[code]
                 $("#houResult").text("Housing OPIMD population rank: " + data.house[code])
             }
             if ($("#hlthTable input:radio:checked").length == 4) {
-                var code = parseInt($("#hlthTable input:radio:checked").map((i,e) => $(e).val()).get().join(""))
+                var code = parseInt($("#hlthTable input:radio:checked").map((i, e) => $(e).val()).get().join(""))
                 window.hlth = data.hlth[code]
                 $("#hlthResult").text("Health OPIMD population rank: " + data.hlth[code])
             }
             if ($("#assetTable input:radio:checked").length == 2) {
-                var code = parseInt($("#assetTable input:radio:checked").map((i,e) => $(e).val()).get().join(""))
+                var code = parseInt($("#assetTable input:radio:checked").map((i, e) => $(e).val()).get().join(""))
                 window.asset = data.assets[code]
                 $("#assetResult").text("Assets OPIMD population rank: " + data.assets[code])
             }
             if ($("#conTable input:radio:checked").length == 2) {
-                var code = parseInt($("#conTable input:radio:checked").map((i,e) => $(e).val()).get().join(""))
+                var code = parseInt($("#conTable input:radio:checked").map((i, e) => $(e).val()).get().join(""))
                 window.con = data.con[code]
                 $("#conResult").text("Connectedness OPIMD population rank: " + data.con[code])
             }
@@ -228,7 +256,7 @@
         function sumAll() {
             if (window.inc && window.house && window.hlth && window.asset && window.con && window.dz) {
                 //=(SUM(D16,D25,D34,D41,D49)+D57*0.1)/5.1*100
-                var sum = (inc + house + hlth + asset + con + dz * .1) / 5.1*100;
+                var sum = (inc + house + hlth + asset + con + dz * .1) / 5.1 * 100;
                 $("#sumResult").text("Sum of ranks: " + sum)
                 console.log(sum)
                 for (var brk of data.breaks) {
@@ -238,33 +266,65 @@
                 }
             }
         }
-        $.getJSON("data.json", function(data) {
+        $.getJSON("data.json", function (data) {
             console.log(data);
             window.data = data
-            $("td").click(function() {
+            $("td").click(function () {
                 console.log("td")
                 var radio = $(this).children("input:radio");
                 radio.prop('checked', true);
                 checkRadios();
             });
-            $("input").click(function(e) {
+            $("input").click(function (e) {
                 e.stopPropagation();
                 checkRadios();
             })
-            $("#address").change(function() {
+            $("#address").change(function () {
                 console.log(this.value)
-                $.getJSON("https://imdmap.auckland.ac.nz/datazoneID?address=" + this.value, function(datazone) {
+                $.getJSON("https://imdmap.auckland.ac.nz/datazoneID?address=" + this.value, function (datazone) {
                     console.log(datazone);
                     var dz = datazone.datazoneID[0];
                     console.log(dz, data.dz[dz])
                     window.dz = data.dz[dz]
                     $("#accessResult").text("Access OPIMD population rank: " + data.dz[dz])
                     sumAll()
-                }).fail(function() {
+                }).fail(function () {
                     $("#accessResult").text("Unable to geocode address - please check your address is correct")
                 })
             })
         })
+
+        var deciles = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        var data = [{
+            type: "sankey",
+            orientation: "h",
+            hoverinfo: "skip",
+            node: {
+                pad: 10,
+                thickness: 30,
+                line: {
+                    color: "black",
+                    width: 0.5
+                },
+                label: ["433K NZers >65"].concat(deciles.map(d =>  {
+                    var text = "Decile " + d;
+                    if (d == 1) {
+                        text += " (least deprived)";
+                    } else if (d == 10) {
+                        text += " (most deprived)";
+                    }
+                    return text;
+                }))
+            },
+
+            link: {
+                source: deciles.map(d => 0),
+                target: deciles,
+                value: deciles.map(d => 1)
+            }
+        }]
+        console.log(data)
+        Plotly.newPlot('decilePlot', data)
     </script>
 </body>
 
